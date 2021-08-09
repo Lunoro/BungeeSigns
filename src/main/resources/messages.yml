@@ -1,0 +1,10 @@
+# you can edit the server wich is on the sign in the SignLocations.yml.
+
+# permission error
+permError: "§c[BungeeSigns-Err]§f you dont have the permission to do this!"
+
+# sign text
+line1: "-------------"
+line2: "§e[Server]"
+line3: ""
+line4: "-------------"

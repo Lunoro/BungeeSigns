@@ -2,7 +2,6 @@ package de.lunoro.bungeesigns;
 
 import de.lunoro.bungeesigns.bungeesign.BungeeSignContainer;
 import de.lunoro.bungeesigns.commands.editSignCommand;
-import de.lunoro.bungeesigns.commands.SaveSignsCommand;
 import de.lunoro.bungeesigns.config.ConfigContainer;
 import de.lunoro.bungeesigns.listeners.BlockBreakListener;
 import de.lunoro.bungeesigns.listeners.PlayerInteractListener;
@@ -38,7 +37,6 @@ public final class BungeeSigns extends JavaPlugin {
     }
 
     private void registerCommands() {
-        Objects.requireNonNull(Bukkit.getPluginCommand("save")).setExecutor(new SaveSignsCommand());
         Objects.requireNonNull(Bukkit.getPluginCommand("editSign")).setExecutor(new editSignCommand());
     }
 

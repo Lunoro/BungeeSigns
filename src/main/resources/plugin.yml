@@ -5,6 +5,4 @@ api-version: 1.17
 authors: [ Lunoro ]
 description: a plugin to switch servers in a bungee network via signs
 commands:
-  save:
-    description: Just a debug command pls contact the developer of this plugin if he hasn't removed him yet.
   editSign:

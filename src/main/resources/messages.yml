@@ -1,9 +1,11 @@
-# you can edit the server wich is on the sign in the SignLocations.yml.
+# you can edit the server wich is on the sign in the SignLocations.yml or via /editSign [servername] command
+# servername is the name of your server in the bungeecord config.yml
 
 # permission error
 permError: "§c[BungeeSigns-Err]§f you dont have the permission to do this!"
 
 # sign text
+# if the line value is "" the line will not change if you write something on the sign
 line1: "-------------"
 line2: "§e[Server]"
 line3: ""

@@ -20,7 +20,6 @@ public class SignChangeListener implements Listener {
         if (!(event.getPlayer().hasPermission("bungeesigns.permissions.events.signcreate"))) return;
         if (Objects.equals(event.getLine(1), "[Server]")) {
             BungeeSignContainer.getInstance().add(new BungeeSign(event.getLine(2), (Sign) event.getBlock().getState()));
-            System.out.println(event.getLines().length);
             int i = 1;
             for (int line = 0; line < 4; line++) {
                 System.out.println(i);
@@ -29,7 +28,6 @@ public class SignChangeListener implements Listener {
                     i++;
                     continue;
                 }
-                System.out.println(content);
                 event.setLine(line, content);
                 i++;
             }

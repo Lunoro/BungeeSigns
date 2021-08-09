@@ -52,7 +52,6 @@ public class BungeeSignContainer {
 
     public void deleteSign(Sign sign) {
         bungeeSignList.removeIf(bungeeSign -> bungeeSign.getSign().getLocation().equals(sign.getLocation()));
-        System.out.println(bungeeSignList.toString());
     }
 
     public void add(BungeeSign bungeeSign) {

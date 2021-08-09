@@ -14,13 +14,10 @@ public class PluginMessageEventListener implements PluginMessageListener {
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         ByteArrayDataInput input = ByteStreams.newDataInput(message);
         String subChannel = input.readUTF();
-        System.out.println(subChannel);
         if (subChannel.equals("GetServers")) {
             serverList = Arrays.asList(input.readUTF().split(", "));
-            System.out.println(serverList.toString());
         }
     }
-
     public List<String> getList() {
         return serverList;
     }

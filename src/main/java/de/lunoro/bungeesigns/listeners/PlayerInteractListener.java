@@ -18,11 +18,9 @@ import java.io.*;
 public class PlayerInteractListener implements Listener {
 
     private final Plugin plugin;
-    private final PluginMessageEventListener messageEventListener;
 
-    public PlayerInteractListener(Plugin plugin, PluginMessageEventListener pluginMessageEventListener) {
+    public PlayerInteractListener(Plugin plugin) {
         this.plugin = plugin;
-        this.messageEventListener = pluginMessageEventListener;
     }
 
     @EventHandler
@@ -74,6 +72,6 @@ public class PlayerInteractListener implements Listener {
 
     private boolean serverExists(String serverName) {
         fetchServers();
-        return messageEventListener.getList().contains(serverName);
+        return PluginMessageEventListener.getInstance().getList().contains(serverName);
     }
 }

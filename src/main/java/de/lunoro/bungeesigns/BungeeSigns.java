@@ -31,7 +31,7 @@ public final class BungeeSigns extends JavaPlugin {
     }
 
     private void registerEvents(PluginMessageEventListener pluginMessageEventListener) {
-        Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(this, pluginMessageEventListener), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         Bukkit.getPluginManager().registerEvents(new SignChangeListener(), this);
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), this);
     }

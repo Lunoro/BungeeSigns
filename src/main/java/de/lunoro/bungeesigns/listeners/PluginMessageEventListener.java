@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PluginMessageEventListener implements PluginMessageListener {
+    private static final PluginMessageEventListener instance = new PluginMessageEventListener();
     private List<String> serverList;
+
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         ByteArrayDataInput input = ByteStreams.newDataInput(message);
@@ -18,7 +20,12 @@ public class PluginMessageEventListener implements PluginMessageListener {
             serverList = Arrays.asList(input.readUTF().split(", "));
         }
     }
+
     public List<String> getList() {
         return serverList;
+    }
+
+    public static PluginMessageEventListener getInstance() {
+        return instance;
     }
 }

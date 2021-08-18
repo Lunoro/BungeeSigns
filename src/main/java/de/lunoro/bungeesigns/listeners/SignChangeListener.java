@@ -22,7 +22,6 @@ public class SignChangeListener implements Listener {
             BungeeSignContainer.getInstance().add(new BungeeSign(event.getLine(1), (Sign) event.getBlock().getState()));
             int i = 1;
             for (int line = 0; line < 4; line++) {
-                System.out.println(i);
                 String content = messages.getString("line" + i);
                 if (content.equals("")) {
                     i++;

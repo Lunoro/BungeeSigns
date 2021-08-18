@@ -27,7 +27,7 @@ public final class BungeeSigns extends JavaPlugin {
     public void onDisable() {
         unregisterPluginChannel();
         BungeeSignContainer.getInstance().save();
-        ConfigContainer.getInstance().getFile("SignLocations").save();
+        ConfigContainer.getInstance().getFile("signLocations").save();
     }
 
     private void registerEvents(PluginMessageEventListener pluginMessageEventListener) {

@@ -29,7 +29,7 @@ public class BungeeSignContainer {
 
     private List<BungeeSign> loadBungeeSigns() {
         List<BungeeSign> list = new ArrayList<>();
-        FileConfiguration config = ConfigContainer.getInstance().getFile("SignLocations").getFileConfiguration();
+        FileConfiguration config = ConfigContainer.getInstance().getFile("signLocations").getFileConfiguration();
         for (String id : config.getKeys(false)) {
             Location location = (Location) Objects.requireNonNull(config.getConfigurationSection(id)).get("location");
             String servername = Objects.requireNonNull(config.getConfigurationSection(id)).getString("servername");
@@ -43,9 +43,9 @@ public class BungeeSignContainer {
 
     public void save() {
         int i = 0;
-        ConfigContainer.getInstance().getFile("SignLocations").clear();
+        ConfigContainer.getInstance().getFile("signLocations").clear();
         for (BungeeSign sign : bungeeSignList) {
-            sign.save(Objects.requireNonNull(ConfigContainer.getInstance().getFile("SignLocations").getFileConfiguration().createSection(String.valueOf(i))));
+            sign.save(Objects.requireNonNull(ConfigContainer.getInstance().getFile("signLocations").getFileConfiguration().createSection(String.valueOf(i))));
             i++;
         }
     }

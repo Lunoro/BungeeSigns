@@ -1,4 +1,4 @@
-# you can edit the server wich is on the sign in the SignLocations.yml or via /editSign [servername] command
+# you can edit the server wich is on the sign in the signLocations.yml or via /editSign [servername] command
 # servername is the name of your server in the bungeecord config.yml
 
 # permission error

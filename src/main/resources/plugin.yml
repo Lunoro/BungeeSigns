@@ -2,7 +2,7 @@ name: BungeeSigns
 version: ${project.version}
 main: de.lunoro.bungeesigns.BungeeSigns
 api-version: 1.17
-authors: [ Lunoro ]
+authors: [ Lunoro, Entjic ]
 description: Plugin for switching servers on bungeecord via signs
 commands:
   editSign:

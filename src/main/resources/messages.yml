@@ -7,7 +7,7 @@ permError: "§c[BungeeSigns-Err]§f you dont have the permission to do this!"
 # sign text
 # if the line value is "" the line will not change if you write something on the sign
 line1: "-------------"
-line2: "§e[Server]"
+line2: "§e[BungeeSign]"
 line3: ""
 line4: "-------------"
 

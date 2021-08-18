@@ -18,7 +18,7 @@ public class SignChangeListener implements Listener {
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
         if (!(event.getPlayer().hasPermission("bungeesigns.permissions.events.signcreate"))) return;
-        if (Objects.equals(event.getLine(1), "[Server]")) {
+        if (Objects.equals(event.getLine(0), "[BungeeSign]")) {
             BungeeSignContainer.getInstance().add(new BungeeSign(event.getLine(2), (Sign) event.getBlock().getState()));
             int i = 1;
             for (int line = 0; line < 4; line++) {

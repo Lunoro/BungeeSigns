@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
-public class editSignCommand implements CommandExecutor {
+public class EditSignCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

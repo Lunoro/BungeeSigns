@@ -6,12 +6,12 @@
 
     <groupId>de.lunoro</groupId>
     <artifactId>BungeeSigns</artifactId>
-    <version>0.0</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>BungeeSigns</name>
 
-    <description>a Sign Plugin to switch Servers in a Bungee Network via Signs</description>
+    <description>Plugin for switching servers on bungeecord via signs</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

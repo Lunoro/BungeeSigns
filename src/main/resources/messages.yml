@@ -10,3 +10,7 @@ line1: "-------------"
 line2: "§e[Server]"
 line3: ""
 line4: "-------------"
+
+# message while connecting to server, use %server% to replace with name
+
+conMessage: "Connecting to %server%"

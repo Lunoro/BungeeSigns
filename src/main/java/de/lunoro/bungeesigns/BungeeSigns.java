@@ -1,7 +1,7 @@
 package de.lunoro.bungeesigns;
 
 import de.lunoro.bungeesigns.bungeesign.BungeeSignContainer;
-import de.lunoro.bungeesigns.commands.editSignCommand;
+import de.lunoro.bungeesigns.commands.EditSignCommand;
 import de.lunoro.bungeesigns.config.ConfigContainer;
 import de.lunoro.bungeesigns.listeners.BlockBreakListener;
 import de.lunoro.bungeesigns.listeners.PlayerInteractListener;
@@ -16,7 +16,7 @@ public final class BungeeSigns extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        PluginMessageEventListener pluginMessageEventListener = new PluginMessageEventListener();
+        PluginMessageEventListener pluginMessageEventListener = PluginMessageEventListener.getInstance();
         saveResource("messages.yml", false);
         registerEvents(pluginMessageEventListener);
         registerCommands();
@@ -37,7 +37,7 @@ public final class BungeeSigns extends JavaPlugin {
     }
 
     private void registerCommands() {
-        Objects.requireNonNull(Bukkit.getPluginCommand("editSign")).setExecutor(new editSignCommand());
+        Objects.requireNonNull(Bukkit.getPluginCommand("editSign")).setExecutor(new EditSignCommand());
     }
 
     private void registerPluginChannel(PluginMessageEventListener pluginMessageEventListener) {

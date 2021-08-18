@@ -3,6 +3,6 @@ version: ${project.version}
 main: de.lunoro.bungeesigns.BungeeSigns
 api-version: 1.17
 authors: [ Lunoro ]
-description: a plugin to switch servers in a bungee network via signs
+description: Plugin for switching servers on bungeecord via signs
 commands:
   editSign:

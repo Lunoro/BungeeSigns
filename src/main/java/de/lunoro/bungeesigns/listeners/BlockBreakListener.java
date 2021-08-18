@@ -2,8 +2,6 @@ package de.lunoro.bungeesigns.listeners;
 
 import de.lunoro.bungeesigns.bungeesign.BungeeSign;
 import de.lunoro.bungeesigns.bungeesign.BungeeSignContainer;
-import de.lunoro.bungeesigns.config.Config;
-import de.lunoro.bungeesigns.config.ConfigContainer;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

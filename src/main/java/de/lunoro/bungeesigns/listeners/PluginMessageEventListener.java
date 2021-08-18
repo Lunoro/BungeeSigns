@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PluginMessageEventListener implements PluginMessageListener {
-    private static final PluginMessageEventListener instance = new PluginMessageEventListener();
+    private static PluginMessageEventListener instance;
     private List<String> serverList;
 
     @Override
@@ -26,6 +26,9 @@ public class PluginMessageEventListener implements PluginMessageListener {
     }
 
     public static PluginMessageEventListener getInstance() {
+        if(instance == null){
+            instance = new PluginMessageEventListener();
+        }
         return instance;
     }
 }

@@ -1,7 +1,9 @@
 package de.lunoro.bungeesigns.listeners;
 
+import de.lunoro.bungeesigns.BungeeSigns;
 import de.lunoro.bungeesigns.bungeesign.BungeeSign;
 import de.lunoro.bungeesigns.bungeesign.BungeeSignContainer;
+import de.lunoro.bungeesigns.config.ConfigContainer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,7 +39,11 @@ public class PlayerInteractListener implements Listener {
         if (!bungeeSign.getSign().getLocation().equals(clickedSign.getLocation())) {
             return;
         }
-        connectToServer(event.getPlayer(), bungeeSign.getServerName());
+        fetchServers();
+        Bukkit.getScheduler().runTaskLaterAsynchronously(BungeeSigns.getProvidingPlugin(BungeeSigns.class), () ->{
+            connectToServer(event.getPlayer(), bungeeSign.getServerName());
+        }, 1);
+
 
     }
 
@@ -55,7 +61,7 @@ public class PlayerInteractListener implements Listener {
             e.printStackTrace();
         }
         player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutputStream.toByteArray());
-        player.sendMessage("Connect to server...");
+        player.sendMessage(ConfigContainer.getInstance().getFile("messages").getString("conMessage").replace("%server%", serverName));
     }
 
     private void fetchServers() {
@@ -63,7 +69,6 @@ public class PlayerInteractListener implements Listener {
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
         try {
             dataOutputStream.writeUTF("GetServers");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +76,6 @@ public class PlayerInteractListener implements Listener {
     }
 
     private boolean serverExists(String serverName) {
-        fetchServers();
         return PluginMessageEventListener.getInstance().getList().contains(serverName);
     }
 }

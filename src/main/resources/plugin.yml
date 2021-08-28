@@ -6,3 +6,4 @@ authors: [ Lunoro, Entjic ]
 description: Plugin for switching servers on bungeecord via signs
 commands:
   editSign:
+  testCommand:

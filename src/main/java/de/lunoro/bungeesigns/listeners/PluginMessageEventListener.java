@@ -11,6 +11,7 @@ import java.util.List;
 public class PluginMessageEventListener implements PluginMessageListener {
     private static PluginMessageEventListener instance;
     private List<String> serverList;
+    private int amountOfPlayersOnServer;
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
@@ -19,14 +20,25 @@ public class PluginMessageEventListener implements PluginMessageListener {
         if (subChannel.equals("GetServers")) {
             serverList = Arrays.asList(input.readUTF().split(", "));
         }
+
+        if (subChannel.equals("PlayerCount")) {
+            String server = input.readUTF();
+            amountOfPlayersOnServer = input.readInt();
+            System.out.println(server);
+            System.out.println(amountOfPlayersOnServer);
+        }
     }
 
     public List<String> getList() {
         return serverList;
     }
 
+    public int getAmountOfPlayersOnServer() {
+        return amountOfPlayersOnServer;
+    }
+
     public static PluginMessageEventListener getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new PluginMessageEventListener();
         }
         return instance;

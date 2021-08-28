@@ -12,7 +12,7 @@ public class BlockBreakListener implements Listener {
     public void onSignDestroy(BlockBreakEvent event) {
         if (!(event.getBlock().getState() instanceof Sign)) return;
         Sign breakingSign = (Sign) event.getBlock().getState();
-        BungeeSign bungeeSign = BungeeSignContainer.getInstance().get(breakingSign.getLocation());
+        BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(breakingSign.getLocation());
         if (bungeeSign == null) return;
         if (!bungeeSign.getSign().getLocation().equals(breakingSign.getLocation())) return;
         if (!(event.getPlayer().hasPermission("bungeesigns.permissions.events.signbreak"))) {

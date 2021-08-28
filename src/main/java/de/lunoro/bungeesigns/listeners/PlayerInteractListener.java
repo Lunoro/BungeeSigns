@@ -27,6 +27,7 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+
         Block clickedBlock = event.getClickedBlock();
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_AIR))
             return;
@@ -34,7 +35,7 @@ public class PlayerInteractListener implements Listener {
         if (clickedBlock.getType().equals(Material.AIR)) return;
         if (!(clickedBlock.getState() instanceof Sign)) return;
         Sign clickedSign = (Sign) clickedBlock.getState();
-        BungeeSign bungeeSign = BungeeSignContainer.getInstance().get(clickedSign.getLocation());
+        BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(clickedSign.getLocation());
         if (bungeeSign == null) return;
         if (!bungeeSign.getSign().getLocation().equals(clickedSign.getLocation())) {
             return;

@@ -41,7 +41,7 @@ public class BungeeSignContainer {
         return list;
     }
 
-    public void save() {
+    public void saveSign() {
         int i = 0;
         ConfigContainer.getInstance().getFile("signLocations").clear();
         for (BungeeSign sign : bungeeSignList) {
@@ -54,14 +54,18 @@ public class BungeeSignContainer {
         bungeeSignList.removeIf(bungeeSign -> bungeeSign.getSign().getLocation().equals(sign.getLocation()));
     }
 
-    public void add(BungeeSign bungeeSign) {
+    public void addSign(BungeeSign bungeeSign) {
         bungeeSignList.add(bungeeSign);
     }
 
-    public BungeeSign get(Location location) {
+    public BungeeSign getSign(Location location) {
         for (BungeeSign bungeeSign : bungeeSignList) {
             if (bungeeSign.getSign().getLocation().equals(location)) return bungeeSign;
         }
         return null;
+    }
+
+    public List<BungeeSign> getBungeeSignList() {
+        return bungeeSignList;
     }
 }

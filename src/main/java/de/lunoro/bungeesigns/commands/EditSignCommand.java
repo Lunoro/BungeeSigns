@@ -30,7 +30,7 @@ public class EditSignCommand implements CommandExecutor {
         Block block = player.getTargetBlockExact(5);
         Location loc = Objects.requireNonNull(block).getLocation();
         if (!(loc.getBlock().getState() instanceof Sign)) return false;
-        BungeeSign bungeeSign = BungeeSignContainer.getInstance().get(loc);
+        BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(loc);
         if (bungeeSign == null) {
             player.sendMessage("Not a valid sign... fine!");
             return false;

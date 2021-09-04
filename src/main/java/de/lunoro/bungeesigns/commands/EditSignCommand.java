@@ -19,25 +19,26 @@ public class EditSignCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
+        Sign sign = (Sign) Objects.requireNonNull(player.getTargetBlockExact(5)).getState();
+        Location signLocation = Objects.requireNonNull(sign).getLocation();
+        if (!(signLocation instanceof Sign)) return false;
         if (!(player.hasPermission("bungeesigns.permissions.commands.editsign"))) {
-            player.sendMessage(ConfigContainer.getInstance().getFile("messages.yml").getString("permError"));
+            player.sendMessage(ConfigContainer.getInstance().getFile("config.yml").getString("permError"));
             return false;
         }
         if (args.length != 1) {
             player.sendMessage("Usage: /editSign [Name of server in bungeecord config.yml].");
             return false;
         }
-        Block block = player.getTargetBlockExact(5);
-        Location loc = Objects.requireNonNull(block).getLocation();
-        if (!(loc.getBlock().getState() instanceof Sign)) return false;
-        BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(loc);
-        if (bungeeSign == null) {
-            player.sendMessage("Not a valid sign... fine!");
-            return false;
+        BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(signLocation);
+        if (signIsBungeeSign(sign, bungeeSign)) {
+            bungeeSign.setServerName(args[0]);
+            player.sendMessage("Sign server edited to " + ChatColor.RED + args[0]);
         }
-        if (!(bungeeSign.getSign().getLocation().equals(loc))) return false;
-        bungeeSign.setServerName(args[0]);
-        player.sendMessage("Sign server edited to " + ChatColor.RED + args[0]);
         return true;
+    }
+
+    private boolean signIsBungeeSign(Sign sign, BungeeSign bungeeSign) {
+        return !(bungeeSign == null) || bungeeSign.getSign().getLocation().equals(sign.getLocation());
     }
 }

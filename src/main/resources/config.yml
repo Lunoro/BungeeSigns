@@ -14,3 +14,7 @@ line4: "-------------"
 # message while connecting to server, use %server% to replace with name
 
 conMessage: "Connecting to %server%"
+
+# sign update counter in seconds
+
+updateCounter: 15

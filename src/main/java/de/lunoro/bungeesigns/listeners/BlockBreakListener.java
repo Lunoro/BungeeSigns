@@ -8,17 +8,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class BlockBreakListener implements Listener {
+
     @EventHandler
     public void onSignDestroy(BlockBreakEvent event) {
         if (!(event.getBlock().getState() instanceof Sign)) return;
         Sign breakingSign = (Sign) event.getBlock().getState();
         BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(breakingSign.getLocation());
-        if (bungeeSign == null) return;
-        if (!bungeeSign.getSign().getLocation().equals(breakingSign.getLocation())) return;
-        if (!(event.getPlayer().hasPermission("bungeesigns.permissions.events.signbreak"))) {
-            event.setCancelled(true);
-            return;
+        if (!(bungeeSign == null)) return;
+        if (bungeeSign.getSign().getLocation().equals(breakingSign.getLocation())) {
+            if (!(event.getPlayer().hasPermission("bungeesigns.permissions.events.signbreak"))) {
+                event.setCancelled(true);
+                return;
+            }
+            BungeeSignContainer.getInstance().deleteSign(breakingSign);
         }
-        BungeeSignContainer.getInstance().deleteSign(breakingSign);
     }
 }

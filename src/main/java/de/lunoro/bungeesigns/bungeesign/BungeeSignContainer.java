@@ -1,6 +1,8 @@
 package de.lunoro.bungeesigns.bungeesign;
 
+import de.lunoro.bungeesigns.config.Config;
 import de.lunoro.bungeesigns.config.ConfigContainer;
+import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,20 +13,15 @@ import java.util.Objects;
 
 public class BungeeSignContainer {
 
-    private static BungeeSignContainer instance;
-
+    @Getter
+    private final static BungeeSignContainer instance = new BungeeSignContainer();
     private final List<BungeeSign> bungeeSignList;
-
+    @Getter
+    private final List<String> serverNameList;
 
     private BungeeSignContainer() {
         this.bungeeSignList = loadBungeeSigns();
-    }
-
-    public static BungeeSignContainer getInstance() {
-        if (instance == null) {
-            instance = new BungeeSignContainer();
-        }
-        return instance;
+        this.serverNameList = loadServernameList();
     }
 
     private List<BungeeSign> loadBungeeSigns() {
@@ -41,11 +38,22 @@ public class BungeeSignContainer {
         return list;
     }
 
+    private List<String> loadServernameList() {
+        List<String> list = new ArrayList<>();
+        for (BungeeSign bungeeSign : bungeeSignList) {
+            if (!list.contains(bungeeSign.getServerName())) {
+                list.add(bungeeSign.getServerName());
+            }
+        }
+        return list;
+    }
+
     public void saveSign() {
         int i = 0;
-        ConfigContainer.getInstance().getFile("signLocations").clear();
+        Config signConfig = ConfigContainer.getInstance().getFile("signLocations");
+        signConfig.clear();
         for (BungeeSign sign : bungeeSignList) {
-            sign.save(Objects.requireNonNull(ConfigContainer.getInstance().getFile("signLocations").getFileConfiguration().createSection(String.valueOf(i))));
+            sign.save(signConfig.getFileConfiguration().createSection(String.valueOf(i)));
             i++;
         }
     }
@@ -58,14 +66,18 @@ public class BungeeSignContainer {
         bungeeSignList.add(bungeeSign);
     }
 
+    public void updatePlayerCount(String servername, int playerCount) {
+        for (BungeeSign bungeeSign : bungeeSignList) {
+            if (bungeeSign.getServerName().equals(servername)) {
+                bungeeSign.updatePlayerCount(playerCount);
+            }
+        }
+    }
+
     public BungeeSign getSign(Location location) {
         for (BungeeSign bungeeSign : bungeeSignList) {
             if (bungeeSign.getSign().getLocation().equals(location)) return bungeeSign;
         }
         return null;
-    }
-
-    public List<BungeeSign> getBungeeSignList() {
-        return bungeeSignList;
     }
 }

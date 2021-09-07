@@ -15,7 +15,6 @@ public class BungeeSign {
     private String serverName;
     @Getter
     private final Sign sign;
-    private int maxPlayers, playerCount;
 
     public BungeeSign(String serverName, Sign sign) {
         this.serverName = serverName;
@@ -25,11 +24,6 @@ public class BungeeSign {
     public BungeeSign(String serverName, Location location) {
         this.serverName = serverName;
         this.sign = (Sign) location.getBlock().getState();
-    }
-
-    public void save(ConfigurationSection section) {
-        section.set("servername", serverName);
-        section.set("location", sign.getLocation());
     }
 
     public void updatePlayerCount(int playerCount) {

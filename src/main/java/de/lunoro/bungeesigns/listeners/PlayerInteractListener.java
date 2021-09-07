@@ -14,8 +14,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class PlayerInteractListener implements Listener {
 
-    ServerConnector serverConnector = ServerConnector.getInstance();
-
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block clickedBlock = event.getClickedBlock();
@@ -24,7 +22,7 @@ public class PlayerInteractListener implements Listener {
         Sign clickedSign = (Sign) clickedBlock.getState();
         BungeeSign bungeeSign = BungeeSignContainer.getInstance().getSign(clickedSign.getLocation());
         if (bungeeSign != null && bungeeSign.getSign().getLocation().equals(clickedSign.getLocation())) {
-            serverConnector.connectPlayerToServer(event.getPlayer(), bungeeSign.getServerName());
+            ServerConnector.connectPlayerToServer(event.getPlayer(), bungeeSign.getServerName());
         }
     }
 

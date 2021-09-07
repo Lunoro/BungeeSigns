@@ -3,6 +3,7 @@ package de.lunoro.bungeesigns.updater;
 import de.lunoro.bungeesigns.BungeeSigns;
 import de.lunoro.bungeesigns.bungeesign.BungeeSignContainer;
 import de.lunoro.bungeesigns.config.ConfigContainer;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 
 import java.io.ByteArrayOutputStream;
@@ -12,12 +13,20 @@ import java.util.List;
 
 public class UpdaterThread extends Thread {
 
+    @Getter
     private final static UpdaterThread instance = new UpdaterThread();
 
-    private final int updateTimeInSeconds = ConfigContainer.getInstance().getFile("config").getFileConfiguration().getInt("updateCounter");
-    private final List<String> servernameList = BungeeSignContainer.getInstance().getServerNameList();
-    private final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    private final DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+    private final int updateTimeInSeconds;
+    private final List<String> servernameList;
+    private final ByteArrayOutputStream byteArrayOutputStream;
+    private final DataOutputStream dataOutputStream;
+
+    private UpdaterThread() {
+        updateTimeInSeconds = ConfigContainer.getInstance().getFile("config").getFileConfiguration().getInt("updateCounter") * 1000;
+        servernameList = BungeeSignContainer.getInstance().getServerNameList();
+        byteArrayOutputStream = new ByteArrayOutputStream();
+        dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+    }
 
     @Override
     public void run() {
@@ -45,9 +54,5 @@ public class UpdaterThread extends Thread {
             dataOutputStream.writeUTF(servername);
         }
         Bukkit.getServer().sendPluginMessage(BungeeSigns.getInstance(), "BungeeCord", byteArrayOutputStream.toByteArray());
-    }
-
-    public static UpdaterThread getInstance() {
-        return instance;
     }
 }

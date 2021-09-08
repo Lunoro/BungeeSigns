@@ -40,7 +40,6 @@ public class Config {
         for (String key : config.getKeys(false)) {
             config.set(key, null);
         }
-
     }
 
     public FileConfiguration getFileConfiguration() {

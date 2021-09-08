@@ -13,27 +13,21 @@ import java.io.IOException;
 
 public class ServerConnector {
 
-    @Getter
-    private final static ServerConnector instance = new ServerConnector();
-    private final ByteArrayOutputStream byteArrayOutputStream;
-    private final DataOutputStream dataOutputStream;
-
-    private final Plugin plugin = BungeeSigns.getInstance();
-    private final Config messageConfig = ConfigContainer.getInstance().getFile("config");
-
-    private ServerConnector() {
-        byteArrayOutputStream = new ByteArrayOutputStream();
-        dataOutputStream = new DataOutputStream(byteArrayOutputStream);
-    }
-
-    public void connectPlayerToServer(Player player, String serverName) {
+    public static void connectPlayerToServer(Player player, String serverName) {
         try {
-            dataOutputStream.writeUTF("Connect");
-            dataOutputStream.writeUTF(serverName);
-            player.sendPluginMessage(plugin, "BungeeCord", byteArrayOutputStream.toByteArray());
-            player.sendMessage(messageConfig.getString("conMessage").replace("%server%", serverName));
+            connect(player, serverName);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void connect(Player player, String serverName) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+        Config messageConfig = ConfigContainer.getInstance().getFile("config");
+        dataOutputStream.writeUTF("Connect");
+        dataOutputStream.writeUTF(serverName);
+        player.sendPluginMessage(BungeeSigns.getInstance(), "BungeeCord", byteArrayOutputStream.toByteArray());
+        player.sendMessage(messageConfig.getString("conMessage").replace("%server%", serverName));
     }
 }

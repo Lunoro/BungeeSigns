@@ -5,6 +5,7 @@ import de.lunoro.bungeesigns.config.ConfigContainer;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -53,9 +54,14 @@ public class BungeeSignContainer {
         Config signConfig = ConfigContainer.getInstance().getFile("signLocations");
         signConfig.clear();
         for (BungeeSign sign : bungeeSignList) {
-            sign.save(signConfig.getFileConfiguration().createSection(String.valueOf(i)));
+            saveInConfigurationSection(sign, signConfig.getFileConfiguration().createSection(String.valueOf(i)));
             i++;
         }
+    }
+
+    private void saveInConfigurationSection(BungeeSign bungeeSign, ConfigurationSection section) {
+        section.set("servername", bungeeSign.getServerName());
+        section.set("location", bungeeSign.getSign().getLocation());
     }
 
     public void deleteSign(Sign sign) {
